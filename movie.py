@@ -7,7 +7,7 @@ import time
 class NowMovieList(object):
 	def __init__(self):
 		print("Instantiating........")
-		self.link = "https://nowplayer.now.com/ondemand/seeall?filterType=appPlayable&nodeId=C201008200000129"
+		self.link = "https://nowtv.now.com/now-select/movie?lang=en"
 		self.movies = []
 		self.movies_scores = []
 
@@ -15,8 +15,8 @@ class NowMovieList(object):
 		print("getting Now Movie List.......")
 		data = requests.get(self.link)
 		content = data.text
-		soup = BeautifulSoup(content, "lxml")
-		titles = soup.find_all('p', attrs={'class' : 'title'})
+		soup = BeautifulSoup(content, "html.parser")
+		titles = soup.find_all('div', attrs={'class' : 'program_title'})
 		for title in titles:
 			self.movies.append(title.text)
 
@@ -34,7 +34,7 @@ class NowMovieList(object):
 			t = threading.Thread(target=self.get_movies_scores, args=[item,])
 			threads.append(t)
 			t.start()
-			time.sleep(0.03)
+			time.sleep(1)
 
 		main_thread = threading.currentThread()
 		for t in threading.enumerate():
@@ -48,10 +48,9 @@ class NowMovieList(object):
 	def print_movies_scores(self):
 		print("printing reuslt.......")
 		for item in self.movies_scores:
-			print("name: "+item.name)
-			print("tomatoter score: "+item.tomatoter_score)
-			print("number of reviews: "+item.tomatoter_count)
-			print("Audience Score: "+item.audience_score)
+			print("name: "+str(item.name))
+			print("tomatoter score: "+str(item.tomatoter_score))
+			print("number of reviews: "+str(item.tomatoter_count))
 			print("----------------")
 
 	def run(self):
