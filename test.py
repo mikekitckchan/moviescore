@@ -8,4 +8,4 @@ data = requests.get(link)
 content = data.text
 soup = BeautifulSoup(content, "html.parser")
 p = json.loads(soup.find('script', {'type':'application/ld+json'}).text)
-print(p["name"])
+print(p)

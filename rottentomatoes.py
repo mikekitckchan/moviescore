@@ -10,6 +10,12 @@ class MovieScore(object):
 		self.tomatoter_score = ""
 		self.tomatoter_count = ""
 		self.tomatoter_link = ""
+		self.production_company=""
+		self.review=[]
+		self.actors=[]
+		self.director=[]
+		self.writers=[]
+		self.genre=[]
 		self.result = 1
 		self.my_score = 0
 		
@@ -65,7 +71,19 @@ class MovieScore(object):
 				self.tomatoter_score = p["aggregateRating"]["ratingValue"]
 				self.tomatoter_count = p["aggregateRating"]["reviewCount"]
 				
-
+				try:
+					self.production_company=p["productionCompany"]['name']
+				except:
+					pass
+					
+				for items in p['review']:
+					self.review.append(items)
+				for items in p['actors']:
+					self.actors.append(items['name'])
+				for items in p['director']:
+					self.director.append(items['name'])
+				for items in p['genre']:
+					self.genre.append(items)
 
 	def run(self):
 		self.search()

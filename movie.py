@@ -3,10 +3,11 @@ import requests
 from rottentomatoes import MovieScore
 import threading
 import time
+import cinemascore 
 
 class NowMovieList(object):
 	def __init__(self):
-		print("Instantiating........")
+		print("Initiating.......")
 		self.link = "https://nowtv.now.com/now-select/movie?lang=en"
 		self.movies = []
 		self.movies_scores = []
@@ -24,7 +25,20 @@ class NowMovieList(object):
 		NewMovie = MovieScore(movie_name)
 		NewMovie.run()
 		if NewMovie.result == 1:
-			self.movies_scores.append(NewMovie)
+			movie_dict = {}
+			movie_dict['name'] = NewMovie.name
+			movie_dict['tomatoter_score'] = NewMovie.tomatoter_score
+			movie_dict['tomatoter_count'] = NewMovie.tomatoter_count
+			movie_dict['production_company'] = NewMovie.production_company
+			#movie_dict['review'] = NewMovie.review
+			movie_dict['actors'] = NewMovie.actors
+			movie_dict['director'] = NewMovie.director
+			movie_dict['writers'] = NewMovie.writers
+			movie_dict['genre'] = NewMovie.genre
+			movie_dict['cinemascore']=cinemascore.getscore(movie_name)
+			#movie_dict['cinemascore'] = newMovie.name
+			self.movies_scores.append(movie_dict)
+
 		
 
 	def make_score_list(self):
@@ -42,16 +56,10 @@ class NowMovieList(object):
 				continue
 			t.join()
 
-		self.movies_scores.sort(key=lambda x: x.my_score, reverse=True)
-
-
 	def print_movies_scores(self):
 		print("printing reuslt.......")
 		for item in self.movies_scores:
-			print("name: "+str(item.name))
-			print("tomatoter score: "+str(item.tomatoter_score))
-			print("number of reviews: "+str(item.tomatoter_count))
-			print("----------------")
+			print(item)
 
 	def run(self):
 		self.get_movies_name()
