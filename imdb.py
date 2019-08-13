@@ -4,32 +4,59 @@ import re
 import ast
 from stringscore import liquidmetal
 import json
+from ssl import SSLError
+import requests.exceptions
+from requests.exceptions import Timeout, ConnectionError
+from urllib3.exceptions import ReadTimeoutError
 
 class imdbMovie(object):
-	def __init__(self, name):
+	def __init__(self, name, year):
 		self.search_name=name
-		self.id=""
-		self.name = ""
-		self.publishdate=""
-		self.description=""
-		self.trailerlink=""
+		self.id="NA"
+		self.name = "NA"
+		self.year = year
+		self.publishdate="NA"
+		self.description="NA"
+		self.trailerlink="NA"
 		self.score=0
 
-	def getid(self, moviename):
+	def getid(self, moviename, year):
 		moviename== re.sub(r"\s", '_', moviename)
-		link = "https://v2.sg.media-imdb.com/suggestion/"+moviename[0]+"/"+moviename+".json" 
-		print("getting id from "+link)
-		data = requests.get(link)
-		data = ast.literal_eval(data.text)
-		data = data["d"]
+		moviename = moviename.replace("\n", "")
+		moviename = moviename.replace("?", "")
+		moviename = moviename.replace("'","")
+		link = "https://v2.sg.media-imdb.com/suggestion/"+moviename[0].lower()+"/"+moviename+".json"
+		try: 
+			data = requests.get(link)
+			print("imdb response: "+str(data))
+			data_string = data.text
+		except (Timeout, SSLError, ReadTimeoutError, ConnectionError, ConnectionResetError):
+			self.score = -1
+			return
+		except:
+			self.score=-1
+			return
+		
+		try:
+			data = ast.literal_eval(data_string)
+		except:
+			self.score = -1
+			return 
+		try:
+			data = data["d"]
+		except:
+			self.score = -1
+			return
 		result =[]
 		for items in data:
-			score = liquidmetal.score(items["l"], moviename)
-			print(score)
-			if score >= 0.95:
-				self.getinfo(items["id"])
-				break
-		
+			movieid = items["id"]
+			try:
+				if str(year) == str(items["y"]):
+					self.getinfo(movieid)
+					return
+			except:
+				pass
+		self.score=-1
 
 	def getinfo(self, movieid):
 		link = "https://www.imdb.com/title/" + movieid + "/"
@@ -44,31 +71,30 @@ class imdbMovie(object):
 			try:
 				self.score = p["aggregateRating"]["ratingValue"]
 			except:
-				self.score = 0
+				pass
 			try:
 				self.publishdate = p["datePublished"]
 			except:
-				self.publishdate = "NA"
+				pass
 			try:
 				self.description = p["description"]
 			except:
-				self.description = "NA"
+				pass
 			try:
 				self.trailerlink = "https://www.imdb.com"+p["trailer"]["embedUrl"]
 			except:
-				self.trailerlink = "NA"
+				pass
 
 		else:
 			self.score = -1
 
 	def run(self):
-		print(self.search_name)
-		self.getid(self.search_name)
+		self.getid(self.search_name, self.year)
 
 
 if __name__ == '__main__':
 	moviename = input("Please enter your movie name: ")
-	NewMovie = imdbMovie(moviename)
+	NewMovie = imdbMovie(moviename, str(2002))
 	NewMovie.run()
 	print(NewMovie.name + " " + NewMovie.description + " " + NewMovie.trailerlink)
 

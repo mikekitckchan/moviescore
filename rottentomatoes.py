@@ -2,6 +2,10 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import json
+from ssl import SSLError
+import requests.exceptions
+from requests.exceptions import Timeout, ConnectionError
+from urllib3.exceptions import ReadTimeoutError
 
 class MovieScore(object):
 	def __init__(self, movie_name):
@@ -21,7 +25,6 @@ class MovieScore(object):
 		
 
 	def search(self):
-		print("Searching: "+self.name)
 		find_movie_name = self.name
 	
 		'''if there are movies like XXX (full version), we just need XXX. So, stop reading when it read ('''
@@ -34,7 +37,15 @@ class MovieScore(object):
 
 		'''join it with link of rottentomatoes'''
 		link = "https://www.rottentomatoes.com/m/"+find_movie_name+"_2019"
-		data = requests.get(link)
+		try:
+			data = requests.get(link)
+		except (Timeout, SSLError, ReadTimeoutError, ConnectionError, ConnectionResetError):
+			self.result = 0
+			return
+		except:
+			self.result = 0
+			return
+		print("rottentomatoes response: "+str(data))
 
 		'''if no such movie, try, _2019 _2018 or _2017, it is rottentomatoes rule'''
 		if data.status_code == 200:
