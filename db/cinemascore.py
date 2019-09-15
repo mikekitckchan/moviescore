@@ -4,7 +4,7 @@ import re
 import base64
 from ssl import SSLError
 import requests.exceptions
-from requests.exceptions import Timeout, ConnectionError
+from requests.exceptions import Timeout, ConnectionError, ConnectTimeout
 from urllib3.exceptions import ReadTimeoutError
 
 def getscore(moviename):
@@ -14,10 +14,10 @@ def getscore(moviename):
 	moviename = moviename.decode(encoding="utf-8")
 	link = "https://www.cinemascore.com/publicsearch/ajax/title/"+str(moviename)
 	try:
-		data = requests.get(link)
+		data = requests.get(link, timeout = 10)
 		print("moviescore response: "+str(data))
 		soup = BeautifulSoup(data.text, "html.parser")
-	except (Timeout, SSLError, ReadTimeoutError, ConnectionError, ConnectionResetError):
+	except (Timeout, SSLError, ReadTimeoutError, ConnectionError, ConnectionResetError, ConnectTimeout):
 		return score
 	except:
 		return score

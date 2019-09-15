@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Movie App</title>
+  </head>
+  <body>
+
+  	<div class="container col-md-6 col-lg-6">
+  	  	<br>
+  	  	<div class = "row">
+  	  		<div class = "col-md-12 col-lg-12">
+  				<h1> Welcome to my movie app!</h1>
+  			</div>
+  		</div>
+  		<br>
+  		<div class = "row">
+  			<div class = "col-md-12 col-lg-12">
+  				<div class = "row">
+  					<input id = "movie" class="form-control" type="text" placeholder="Input a movie name" oninput="movieInputFunction()"> 
+  				</div>
+  				<br>	
+  			</div>
+  		</div>
+  	</div>
+  	<br>
+    <ul id="movies"></ul>
+
+    <script>
+    	var link = 'http://127.0.0.1:5000/data';
+    	var request = new XMLHttpRequest();
+    	request.open('GET', link, true);
+    	function movieInputFunction() {
+  			var para = document.getElementById("movie").value;
+  			
+  			if (para.length === 0) {
+    		link = 'http://127.0.0.1:5000/data';
+    		request.open('GET', link, true);
+    		
+  		}else{
+  			link = 'http://127.0.0.1:5000/data?moviename='+para;
+  			request.open('GET', link, true);
+  				
+  		}
+  		return
+		}
+    	
+      	request.onload = function () {
+      		// Convert JSON data to an object
+      		console.log("onload");
+      		let movies = JSON.parse(this.response);
+      		movies.sort(function(a, b) {
+    			return parseFloat(b.descrip) - parseFloat(a.descrip);
+			});
+      		movies.sort(function(a, b) {
+    			return parseFloat(b.rottenscore) - parseFloat(a.rottenscore);
+			});
+			movies.sort(function(a, b) {
+    			return parseFloat(b.imdbscore) - parseFloat(a.imdbscore);
+			});
+      		let output = '<table class="table table-hover"> <thead> <tr> <th>  Movie Name  </th><th>  year  </th><th>  Description  </th><th>  trailer  </th><th>  imdb score  </th><th>  rotten tomatoe score  </th><th>  Cinema score  </th> </tr></thead> <tbody>';
+      		for (var i = 0; i < movies.length; i++) {
+        		output += '<tr>' + '<td>  ' + movies[i].moviename + '  </td>' + '<td>  ' + movies[i].year + '  </td>' + '<td>  ' + movies[i].descrip + '</td>' 
+        		if (movies[i].trailerlink != "NA")
+        			{
+        				output +=' <td> '+ '<a href='+movies[i].trailerlink+'>trailer link </a>'+'</td>'
+        			}
+        		else{
+        				output +=' <td> Not Available</td>'
+        			}
+
+        		output += '<td>  ' + movies[i].imdbscore + '  </td>' + '<td>  ' + movies[i].rottenscore + '  </td>' + '<td>  ' + movies[i].cinemascore + '  </td>' + '<tr>' 
+      			}
+      		output+= '</tbody></table>'
+      		document.getElementById('movies').innerHTML = output;
+    		}
+    		request.send();
+
+    </script>
+    <style>
+		.footer {
+   		position: fixed;
+   		left: 150px;
+   		bottom: 0;
+   		width: 80%;
+   		background-color: white;
+   		color: white;
+   		text-align: left;
+	}
+</style>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+

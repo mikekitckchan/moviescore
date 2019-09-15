@@ -2,11 +2,10 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import ast
-from stringscore import liquidmetal
 import json
 from ssl import SSLError
 import requests.exceptions
-from requests.exceptions import Timeout, ConnectionError
+from requests.exceptions import Timeout, ConnectionError, Timeout
 from urllib3.exceptions import ReadTimeoutError
 
 class imdbMovie(object):
@@ -26,11 +25,12 @@ class imdbMovie(object):
 		moviename = moviename.replace("?", "")
 		moviename = moviename.replace("'","")
 		link = "https://v2.sg.media-imdb.com/suggestion/"+moviename[0].lower()+"/"+moviename+".json"
+
 		try: 
-			data = requests.get(link)
-			print("imdb response: "+str(data))
+			data = requests.get(link, timeout=10)
+			#print("imdb response: "+str(data))
 			data_string = data.text
-		except (Timeout, SSLError, ReadTimeoutError, ConnectionError, ConnectionResetError):
+		except (Timeout, SSLError, ReadTimeoutError, ConnectionError, ConnectionResetError, Timeout):
 			self.score = -1
 			return
 		except:
@@ -60,7 +60,7 @@ class imdbMovie(object):
 
 	def getinfo(self, movieid):
 		link = "https://www.imdb.com/title/" + movieid + "/"
-		print("getting movie info from " + link)
+		#print("getting movie info from " + link)
 		data = requests.get(link)
 		if data.status_code == 200:
 			soup = BeautifulSoup(data.text, "html.parser")
