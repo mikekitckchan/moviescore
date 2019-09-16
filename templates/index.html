@@ -23,7 +23,7 @@
   		<div class = "row">
   			<div class = "col-md-12 col-lg-12">
   				<div class = "row">
-  					<input id = "movie" class="form-control" type="text" placeholder="Input a movie name" oninput="movieInputFunction()"> 
+  					<input id = "movie" class="form-control" type="text" placeholder="Input a movie name" oninput="listenFunction()"> 
   				</div>
   				<br>	
   			</div>
@@ -33,40 +33,42 @@
     <ul id="movies"></ul>
 
     <script>
-    	var link = 'http://127.0.0.1:5000/data';
-    	var request = new XMLHttpRequest();
-    	request.open('GET', link, true);
-    	function movieInputFunction() {
-  			var para = document.getElementById("movie").value;
-  			
-  			if (para.length === 0) {
-    		link = 'http://127.0.0.1:5000/data';
-    		request.open('GET', link, true);
-    		
-  		}else{
-  			link = 'http://127.0.0.1:5000/data?moviename='+para;
-  			request.open('GET', link, true);
-  				
-  		}
-  		return
+    	var para = '';
+    	var request;
+    	startRequest();
+    	function listenFunction() {
+    		console.log('start listening');
+  			para = document.getElementById("movie").value;
+  			startRequest();
 		}
-    	
-      	request.onload = function () {
-      		// Convert JSON data to an object
-      		console.log("onload");
-      		let movies = JSON.parse(this.response);
-      		movies.sort(function(a, b) {
+
+    	function startRequest() {
+    		console.log(para);
+  			request = new XMLHttpRequest();
+  			let link = '';
+  			    		
+  			if (para.length === 0) {
+    			link = 'http://127.0.0.1:5000/data';
+  			}else{
+  				link = 'http://127.0.0.1:5000/data?moviename='+para;
+    		}
+  			
+  			console.log(link);
+  			request.open("GET", link, true);
+  			request.onload = function () {
+  				let movies = JSON.parse(request.response);
+      			movies.sort(function(a, b) {
     			return parseFloat(b.descrip) - parseFloat(a.descrip);
-			});
-      		movies.sort(function(a, b) {
+				});
+      			movies.sort(function(a, b) {
     			return parseFloat(b.rottenscore) - parseFloat(a.rottenscore);
-			});
-			movies.sort(function(a, b) {
+				});
+				movies.sort(function(a, b) {
     			return parseFloat(b.imdbscore) - parseFloat(a.imdbscore);
-			});
-      		let output = '<table class="table table-hover"> <thead> <tr> <th>  Movie Name  </th><th>  year  </th><th>  Description  </th><th>  trailer  </th><th>  imdb score  </th><th>  rotten tomatoe score  </th><th>  Cinema score  </th> </tr></thead> <tbody>';
-      		for (var i = 0; i < movies.length; i++) {
-        		output += '<tr>' + '<td>  ' + movies[i].moviename + '  </td>' + '<td>  ' + movies[i].year + '  </td>' + '<td>  ' + movies[i].descrip + '</td>' 
+				});
+      			let output = '<table class="table table-hover"> <thead> <tr> <th>  Movie Name  </th><th>  year  </th><th>  Description  </th><th>  trailer  </th><th>  imdb score  </th><th>  rotten tomatoe score  </th><th>  Cinema score  </th> </tr></thead> <tbody>';
+      			for (var i = 0; i < movies.length; i++) {
+        			output += '<tr>' + '<td>  ' + movies[i].moviename + '  </td>' + '<td>  ' + movies[i].year + '  </td>' + '<td>  ' + movies[i].descrip + '</td>' 
         		if (movies[i].trailerlink != "NA")
         			{
         				output +=' <td> '+ '<a href='+movies[i].trailerlink+'>trailer link </a>'+'</td>'
@@ -77,10 +79,15 @@
 
         		output += '<td>  ' + movies[i].imdbscore + '  </td>' + '<td>  ' + movies[i].rottenscore + '  </td>' + '<td>  ' + movies[i].cinemascore + '  </td>' + '<tr>' 
       			}
-      		output+= '</tbody></table>'
-      		document.getElementById('movies').innerHTML = output;
-    		}
-    		request.send();
+      			output+= '</tbody></table>'
+      			document.getElementById('movies').innerHTML = output;
+      		}
+  			request.send();
+  		}
+
+  		
+			
+		
 
     </script>
     <style>
