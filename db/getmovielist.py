@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+import datetime
 
 def getmovielist(year):
 	link = "https://www.wildaboutmovies.com/"+year+"_movies/" 
@@ -17,8 +18,9 @@ def getmovielist(year):
 
 if __name__ == '__main__':
 	result=""
-	for i in range (2017, 2020):
-		result = getmovielist(str(i))
-		text_file = open(str(i)+".txt", "w")
-		text_file.write(str(result))
-		text_file.close()
+	now = datetime.datetime.now()
+	currentyear = str(now.year)
+	result = getmovielist(currentyear)
+	text_file = open("./movielist/"+currentyear+".txt", "w")
+	text_file.write(str(result))
+	text_file.close()

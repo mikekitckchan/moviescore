@@ -1,10 +1,11 @@
 import csv
-from db.imdb import imdbMovie
-import db.cinemascore
-from db.rottentomatoes import MovieScore
+from score.imdb import imdbMovie
+import score.cinemascore as cinemascore
+from score.rottentomatoes import MovieScore
 import time
 import shutil
 from tempfile import NamedTemporaryFile
+import os
 
 fields = ['movie name', 'imdb name', 'year', 'description', 'trailer link', 'movie id', 'imdb score', 'rotten score', 'cinema score', 'user score']
 timeout = 0
@@ -30,14 +31,15 @@ def readdb(dbfile, para = None):
 		with open(dbfile, 'r') as csvfile:
 			reader = csv.DictReader(csvfile, fieldnames=fields)
 			for row in reader:
-				movie ={}
-				movie = dictionarymaker(row)
-				output.append(movie)
+				if row['movie name']!= 'movie name':
+					movie ={}
+					movie = dictionarymaker(row)
+					output.append(movie)
 	else:
 		with open(dbfile, 'r') as csvfile:
 			reader = csv.DictReader(csvfile, fieldnames=fields)
 			for row in reader:
-				if para in row['movie name'] or para in row['movie name'].lower() or para in row['movie name'].upper():
+				if para.lower() in row['movie name'].lower() or para.lower() in row['description'].lower():
 					movie ={}
 					movie=dictionarymaker(row)
 					output.append(movie)
@@ -88,37 +90,61 @@ def getmovieinfo(moviename, year):
 def createdb(year):
 	global fields
 
-	readfilename = str(year) + ".txt"
-	writefilename = "moviescore"+str(year)+".csv"
+	readfilename = "./movielist/"+str(year)+".txt"
+	writefilename = "./moviescorelist/moviescore"+str(year)+".csv"
 
-	print("writing "+writefilename)
-	try:
-		with open(readfilename, 'r') as txtfile:
-			movies = txtfile.readlines()
-			txtfile.close()
-			with open(writefilename, 'w', newline='') as csvfile:
-				writer = csv.DictWriter(csvfile, fieldnames=fields)
-				writer.writeheader()
-				for items in movies:
-					items = items.replace("\n", "")
-					print("writing movie: "+items)
-					movie = getmovieinfo(items, year)
-					writer.writerow(movie)
-					time.sleep(1)
-	except IOError:
-		print("no movies availabe for such year")
+	if os.path.isfile(writefilename):
+		try:
+			tempfile = NamedTemporaryFile(mode='w', delete=False)
+			with open(readfilename, 'r') as txtfile:
+				movies = txtfile.readlines()
+				txtfile.close()
+				with open('tempfile.csv', 'w', newline='') as tempfile:
+					writer=csv.DictWriter(tempfile, fieldnames=fields)
+					writer.writeheader()
+					for items in movies:
+						if len(items)>1:
+							items = items.replace("\n", "")
+							print("writing movie: "+items)
+							movie = getmovieinfo(items, year)
+							writer.writerow(movie)
+							time.sleep(0.1)
+						break
+			shutil.move(tempfile.name, writefilename)
+		except IOError:
+			print("opps!")
+
+	else:
+		try:
+			with open(readfilename, 'r') as txtfile:
+				movies = txtfile.readlines()
+				txtfile.close()
+				with open(writefilename, 'w', newline='') as csvfile:
+					writer = csv.DictWriter(csvfile, fieldnames=fields)
+					writer.writeheader()
+					for items in movies:
+						print(items)
+						print(len(items))
+						if len(items)>1:
+							items = items.replace("\n", "")
+							print("writing movie: "+items)
+							movie = getmovieinfo(items, year)
+							writer.writerow(movie)
+							time.sleep(0.1)
+		except IOError:
+			print("no movies availabe for such year")
 
 if __name__ == '__main__':
 	start_time = time.time()
 	choice = input("input 0 if you want to create new database, 1 to updade existing db, 2 to read database")
 	if choice == "0":
-		for i in range(2016, 2020):
-			createdb(str(i))
-		print("successful update into database")
-		end_time = time.time()
-		print(end_time)
-		period = (end_time - start_time)
-		print("this db update takes: "+str(period)+" seconds")
+		for i in range(2007, 2008):
+			createdb(i)
+			print("successful update into database")
+			end_time = time.time()
+			print(end_time)
+			period = (end_time - start_time)
+			print("this db update takes: "+str(period)+" seconds")
 	elif choice =="1":
 		moviename=input("input a movie name")
 		year=input("input the movie year")

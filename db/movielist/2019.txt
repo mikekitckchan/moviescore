@@ -1,117 +1,99 @@
-Hobbs and Shaw
-Joan The Maid
-Leo Da Vinci: Mission Mona Lisa
-Love, Antosha
-Luce
-Piranhas
-Tel Aviv On Fire
-The Nightingale
-Them That Follow
-After the Wedding
-Brian Banks
-Dora and the Lost City of Gold
-ECCO
-Ode To Joy
-One Child Nation
-Scary Stories to Tell in the Dark
-The Art of Racing in the Rain
-The Bravest
-The Kitchen
-The Peanut Butter Falcon
-Angry Birds 2
-Birds Without Feathers
-Blinded By The Light
-47 Meters Down: Uncaged
-Aquarela
-Cold Case HammarskjÃ¶ld
-End of the Century
-Good Boys
-Where'd You Go, Bernadette
-Ready Or Not
-Angel Has Fallen
-Brittany Runs a Marathon
-Fiddler A Miracle of Miracles
-Give Me Liberty
-Miles Davis: Birth of the Cool
-Overcomer
-Before You Know It
-Bennett's War
-Don't Let Go
-Official Secrets
-Raise Hell: The Life &amp; Times of Molly Ivins
-The Matrix 20th Anniversary
-Todos Caen
-It Chapter 2
-Linda Ronstadt: The Sound of My Voice
-Ms. Purple
-Say Amen, Somebody
-Freaks
-Hustlers
-Monos
-The Goldfinch
-Ad Astra
-Downton Abbey
-Loro
-Rambo 5 Last Blood
-Where's My Roy Cohn?
-Abominable
-First Love
-Judy
-The Hunt
-The Report
+Celebration
+Gregory's Girl (2019 Re-Release)
 Joker
-Low Tide
 Lucy In The Sky
+Memory: The Origins of Alien
 Pain and Glory
-The Current War
+The Climbers
+Wallflower
+Wrinkles The Clown
+Mister America
+A German Youth
 Gemini Man
+High Strung Free Dance
+Je T'Aime Moi Non Plus (2019 ReRelease)
+Jexi
 Parasite
 The Addams Family (2019)
+The Cotton Club Encore
+The King
+Jay and Silent Bob Reboot
+By The Grace Of God
+Cyrano, My Love
 JoJo Rabbit
 Maleficent 2
+Serendipity
 The Lighthouse
 Zombieland 2
 Black and Blue
 Countdown
+Filibus (1915)
 Frankie
-The Last Full Measure
-Burden
+Making Waves: The Art of Cinematic Sound
+Paradise Hills
+Synonyms
+The Current War
+The Great Alaskan Race
+The Kill Team
+Western Stars
+Arctic Dogs
 Harriet
+Inside Game
 Motherless Brooklyn
 Terminator Dark Fate
-Arctic Dogs
+The Irishman
+Marriage Story
 Doctor Sleep
 Honey Boy
 Last Christmas
 Midway
+Mr. Toilet: The Worldâs #2 Man
 Playing With Fire
+The Kingmaker
+Mickey And The Bear
 Charlie's Angels (2019)
+Dolemite Is My Name
 Ford vs Ferrari
+I Lost My Body
+Scandalous
 The Good Liar
-The Irishman
+The Report
+The Warrior Queen of Jhansi
+Waves
 21 Bridges
 A Beautiful Day in the Neighborhood
+Citizen K
+Dark Waters
 Frozen 2
-The Rhythm Section
 Knives Out
 Queen and Slim
+The Traitor
+The Two Popes
 Playmobil The Movie
 Portrait of a Lady on Fire
 The Aeronauts
 The Boy 2
 A Hidden Life
 Black Christmas
+Cunningham
 Jumanji 2: The Next Level
-The Laundromat
+Seberg
+The Ballad of Richard Jewell
 Uncut Gems
+Bombshell
 Cats
-Roger Ailes
 Star Wars: The Rise of Skywalker
 Super-Intelligence
 1917
+A Rainy Day in New York
+American Dharma
 Just Mercy
 Little Women (2019)
+Lyrebird
 Spies In Disguise
+The Painted Bird
+The Song of Names
+Clemency
 American Hangman
 Escape Room
 Great Great Great
@@ -246,6 +228,7 @@ Slut In a Good Way
 The Beach Bum
 The Chaperone
 Unplanned
+Christ Stopped at Eboli
 Amazing Grace
 Billboard
 High Life
@@ -351,7 +334,6 @@ Ophelia
 The Other Side of Heaven 2 Fire of Faith
 The Other Story
 The Queen
-This Changes Everything
 Three Peaks
 Yesterday
 Midsommar
@@ -376,6 +358,7 @@ Streetwise (1984)
 The Lion King (2019)
 Tiny: The Life of Erin Blackwell
 The Fighting Preacher
+Angels Are Made of Light
 For Sama
 Honeyland
 Mike Wallace Is Here
@@ -383,22 +366,107 @@ Once Upon A Time In Hollywood
 The Ground Beneath My Feet
 The Mountain
 Jay Myself
-Little Monsters
+Hobbs and Shaw
+Joan The Maid
+Leo Da Vinci: Mission Mona Lisa
+Love, Antosha
+Luce
+Piranhas
+Tel Aviv On Fire
+The Nightingale
+Them That Follow
+After the Wedding
+Brian Banks
+Dora and the Lost City of Gold
+ECCO
+Ode To Joy
+One Child Nation
+Scary Stories to Tell in the Dark
+The Art of Racing in the Rain
+The Bravest
+The Kitchen
+The Peanut Butter Falcon
+Angry Birds 2
+Birds Without Feathers
+47 Meters Down: Uncaged
+Aquarela
+Blinded By The Light
+Cold Case HammarskjÃ¶ld
+End of the Century
+Good Boys
+Line Walker 2
+The Divine Fury
+The Second Sun
+Where'd You Go, Bernadette
+Ready Or Not
+Angel Has Fallen
+Becoming Burlesque
+Brittany Runs a Marathon
+Fiddler A Miracle of Miracles
+Give Me Liberty
+Miles Davis: Birth of the Cool
+Overcomer
+Vita and Virginia
+NeZha
+Before You Know It
+Bennett's War
+Don't Let Go
+Killerman
+Official Secrets
+Raise Hell: The Life &amp; Times of Molly Ivins
+The Matrix 20th Anniversary
+Todos Caen
+Aga
+Blink Of An Eye
+Edie
+I'm Leaving Now
+It Chapter 2
+Linda Ronstadt: The Sound of My Voice
+Mr. Klein (2019 Re-Release)
+Ms. Purple
+Rapid Response
+Say Amen, Somebody
+Chained For Life
+Another Day Of Life
+Chasing Einstein
+Cracked Up
+Depraved
+Desolation Center
+Freaks
+Hustlers
+Imprisoned
+Liam Gallagher: As It Was
+Monos
+Moonlight Sonata
+One Cut of the Dead
+Out Of Liberty
+The Goldfinch
+The Harvesters
+The Sound Of Silence
+Midnight Traveler
+Ad Astra
+Britt-Marie Was Here
+Corporate Animals
+Don't Be Nice
+Downton Abbey
+Loro
+Midnight Diner
+Rambo 5 Last Blood
+Tazza: One Eyed Jack
+Villains
+Where's My Roy Cohn?
+Zeroville
+Abominable
+First Love
+Judy
+Serie Noire (2019 Rerelease)
+The Day Shall Come
+The Death of Dick Long
+The Golden Glove
+The Laundromat
 Troop Zero
-Anthropocene The Human Epoch
-Dilili in Paris
 Anastasia (2019)
-Mr. Jones
 The Death and Life of John F. Donovan
 Eternal Beauty
-Run Sweetheart Run
-Waves
-Shirley
 In Fabric
-Falling
-Misbehavior
-The Kill Team
-The Lodge
-Polaroid
-Normal People
-The Silence (2019)
+Ordinary Love
